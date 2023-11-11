@@ -5,6 +5,6 @@ run: build
 	./bin/utxo-chain
 
 test:
-	go test ./...
+	go test -v ./...
 
 PHONY: build run test
