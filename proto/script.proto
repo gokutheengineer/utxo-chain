@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb; 
+
+//import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/gokutheengineer/utxo-chain/pb";
+
+enum ScriptType {
+    UNKNOWN = 0;
+    P2PKH = 1; // Pay to Public Key Hash
+    P2SH = 2; // Pay to Script Hash
+}
+
+message ScriptSig {
+    ScriptType type = 1;
+    bytes signature = 2;
+    bytes publicKey = 3; 
+    bytes customScript = 4; // used if type is UNKNOWN
+}
+
