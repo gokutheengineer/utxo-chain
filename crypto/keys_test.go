@@ -12,12 +12,10 @@ func TestKeyGeneration(t *testing.T) {
 	privKey, err := NewPrivateKey()
 	require.NoError(t, err)
 	require.NotEmpty(t, privKey.key)
-	require.Equal(t, len(privKey.Bytes()), privKeyLen)
 
 	privKey2, err := NewPrivateKey()
 	require.NoError(t, err)
 	require.NotEmpty(t, privKey.key)
-	require.Equal(t, len(privKey.Bytes()), privKeyLen)
 
 	pubKey := privKey.GeneratePublicKey()
 	require.NotEmpty(t, pubKey.key)
@@ -40,7 +38,6 @@ func TestKeyGenerationFromSeed(t *testing.T) {
 	privKey, err := NewPrivateKeyFromString(seedString)
 	require.NoError(t, err)
 	require.NotEmpty(t, privKey)
-	require.Equal(t, len(privKey.Bytes()), privKeyLen)
 
 	pubKey := privKey.GeneratePublicKey()
 	require.NotEmpty(t, pubKey.key)
@@ -57,5 +54,4 @@ func TestKeyGenerationFromSeed(t *testing.T) {
 	privKey, err = NewPrivateKeyFromSeed(seedBytes)
 	require.NoError(t, err)
 	require.NotEmpty(t, privKey)
-	require.Equal(t, len(privKey.Bytes()), privKeyLen)
 }

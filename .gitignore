@@ -22,5 +22,7 @@ go.work
 
 *.log
 .vscode
-/bin
-/pb
+bin/*
+!bin/.gitkeep
+pb/*
+!pb/.gitkeep
