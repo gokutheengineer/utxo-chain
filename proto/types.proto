@@ -3,35 +3,42 @@ syntax = "proto3";
 package pb; 
 
 import "google/protobuf/timestamp.proto";
+import "script.proto";
 
 option go_package = "github.com/gokutheengineer/utxo-chain/pb";
 
 message Block {
-    Header header = 1;
+    BlockHeader header = 1;
     repeated Transaction transactions = 2;
 
 }
 
-message Header {
-    string previousHash = 1;
-    string merkleRoot = 2;
+message BlockHeader {
+    bytes previousHash = 1;
+    bytes merkleRoot = 2;
     google.protobuf.Timestamp timestamp = 3;
     int64 nonce = 4;
     int64 height = 5;
     int64 version = 6;
-    string hash = 7;
+    int64 difficulty = 7;
 }
 
 message Transaction {
-    string from = 1;
-    string to = 2;
-    int64 amount = 3;
-    int64 fee = 4;
-    google.protobuf.Timestamp dateCreated = 5;
-    string data = 6;
-    string senderPubKey = 7;
-    string transactionDataHash = 8;
-    string senderSignature = 9;
-    string minedInBlockIndex = 10;
-    string transferSuccessful = 11;
+    repeated TransactionInput inputs = 1;
+    repeated TransactionOutput outputs = 2;
+    int64 fee = 3;
+    bytes data = 4;
+    bytes transactionDataHash = 5;
+}
+
+message TransactionInput {
+    bytes prev_out_tx_hash = 1;
+    int32 prev_out_index = 2;
+    ScriptSig script_sig = 3;
+    bytes sequence = 4;
+}
+
+message TransactionOutput {
+    bytes address = 1;
+    int64 amount = 2;
 }
